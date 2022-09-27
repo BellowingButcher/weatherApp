@@ -1,8 +1,8 @@
 # Weather App
 ### INIT
 - static
-    - title
-    - zipSubmit
+    - titleBox
+    - zipSubmitBox
         - text box for user zip
         - button for submiting zip
 - dynamic
@@ -43,7 +43,14 @@
             - static- 'Other info'
             - dynamic- displays image based on api icon
 - addElement
-    - 
+    - Textbox
+        - static 'paragraph'
+        - dynamic 'paragraph'
+    - display box
+        - city textBox
+        - temperatureTextBox
+        - conditionTextBox
+        - imageBox
 - temp convert
     - k to ferinheit
     - k to celcius
