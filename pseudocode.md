@@ -43,7 +43,7 @@
             - static- 'Other info'
             - dynamic- displays image based on api icon
 - addElement
-    - Textbox
+    - div
         - static 'paragraph'
         - dynamic 'paragraph'
     - display box
@@ -63,6 +63,14 @@
             - else
                 - alert user of an invalid zip
 - validateUserZip
+    - If submission has any NAN
+        - alert
+    - If the submission number length is less than 5
+        - alert
+    - If the submission number length is greater than 5
+        - alert
+    - else give a true or a green light for the zip submission
+    
 - handleError
 
 
