@@ -37,11 +37,11 @@ function createP(id, text, parent) {
     p.textContent = text;
     parent.appendChild(p);
 }
-function createImg(src, alt, temp, parent) {
+function createImg(src, alt, parent) {
     let img = document.createElement('img');
-    img.setAttribute('src', src)
-    img.setAttribute('alt', alt)
-    img.setAttribute('temp', temp)
+    img.setAttribute('src', src);
+    img.setAttribute('alt', alt);
+    img.setAttribute('class', 'img-fluid');
     parent.appendChild(img);
 }
 
@@ -87,19 +87,36 @@ function validateZip(usersZip) {
 async function updateApp () {
 
     let data = await getWeather (document.getElementById('userZip').value);
-    console.log('after event', data);
+    // console.log('after event', data);
     let cityName = data.data.name;
-    console.log(cityName);
+    // console.log(cityName);
     let tempK = data.data.main.temp;
-    console.log(tempK);
+    // console.log(tempK);
     let condition = data.data.weather[0].main;
-    console.log(condition);
-    let icon = data.data.weather[0].icon;
-    console.log(icon);
+    // console.log(condition);
+    // console.log(icon);
     let tempF = ((tempK - 273.15)*(9/5)+(32)).toFixed(2);
-    console.log(tempF);
+    // console.log(tempF);
     let tempC = (tempK - 273.15).toFixed(2);
-    console.log(tempC);
+    // console.log(tempC);
+    let imgSrc;
+    let imgAlt;
+    let imgParent;
+    if (tempF < 32) {
+    imgSrc = images/cold.jpg;
+    imgAlt = 'cold thermometer';
+    imgParent = 'icon';
+    }
+    else if (tempf > 55) {
+    imgSrc = images/hot.jpg;
+    imgAlt = 'hot thermometer';
+    imgParent = 'icon';
+    }
+    else {
+    imgSrc = images/mild.jpg;
+    imgAlt = 'mild thermometer';
+    imgParent = 'icon';
+    }
     document.getElementById('cityDynamic').textContent = cityName;
     document.getElementById('kTemp').textContent = tempK + " Kelvin";
     document.getElementById('fTemp').textContent = tempF + " Farenheit";
