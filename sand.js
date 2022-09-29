@@ -160,6 +160,7 @@ Begining my submitZipButton function
 
 
     zipSubmit.addEventListener('click', async () => {
+        
     //     validateZip with the information submited with click
     //     if zip is not valid alert not a valid zip
     //     if zip is valid run getWeather
@@ -174,11 +175,16 @@ Begining my submitZipButton function
         console.log(condition);
         let icon = data.data.weather[0].icon;
         console.log(icon);
-        let tempF = ((tempK - 273.15)*(9/5)+(32));
+        let tempF = ((tempK - 273.15)*(9/5)+(32)).toFixed(2);
         console.log(tempF);
-        let tempC = (tempK - 273.15);
+        let tempC = (tempK - 273.15).toFixed(2);
         console.log(tempC);
         document.getElementById('cityDynamic').textContent = cityName;
+        document.getElementById('kTemp').textContent = tempK + " Kelvin";
+        document.getElementById('fTemp').textContent = tempF + " Farenheit";
+        document.getElementById('cTemp').textContent = tempC + " Centigrade";
+        document.getElementById('dynamicCondition').textContent = condition;
+
         
         
     })
