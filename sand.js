@@ -36,7 +36,6 @@ more dynamic than just hardcoding seperate elements in.
 
 
 let main = document.getElementById('main');
-const zip = [];
 
 function createDiv(id, parent) {
     let div = document.createElement('div');
@@ -51,36 +50,42 @@ function createP(id, text, parent) {
 }
 
 
-createDiv('static', main);
-createDiv('titleAndZip', static);
-createP('weatherTitle', 'Weather App', titleAndZip);
-createDiv('zipBox', titleAndZip)
+    createDiv('static', main);
+    createDiv('titleAndZip', static);
+    createP('weatherTitle', 'Weather App', titleAndZip);
+    createDiv('zipBox', titleAndZip)
+    
+    let enterZip = document.createElement('input');
+    enterZip.setAttribute('type', 'number');
+    enterZip.setAttribute('id', 'userZip')
+    titleAndZip.appendChild(enterZip);
+    let zipSubmit = document.createElement('button');
+    zipSubmit.textContent = 'Get Weather'
+    zipSubmit.setAttribute('id', 'zipBtn');
+    static.appendChild(zipSubmit);
 
-let enterZip = document.createElement('input');
-enterZip.setAttribute('type', 'number');
-enterZip.setAttribute('id', 'userZip')
-titleAndZip.appendChild(enterZip);
-let zipSubmit = document.createElement('button');
-zipSubmit.textContent = 'Get Weather'
-zipSubmit.setAttribute('id', 'zipBtn');
-static.appendChild(zipSubmit);
+
+function dynamicInit() {
+
+    createDiv('dynamic', main);
+    createDiv('city', dynamic)
+    createP('cityStatic', 'City', city);
+    createP('cityDynamic', 'second P', city);
+    createDiv('temperature', dynamic);
+    createP('tempStatic', 'Temperature', temperature);
+    createP('kTemp', 'Kelvin', temperature);
+    createP('fTemp', 'Farenheit', temperature);
+    createP('cTemp', 'Centigrade', temperature);
+    createDiv('condition', dynamic);
+    createP('staticCondition', 'Condition', condition);
+    createP('dynamicCondition', 'second P', condition);
+    createDiv('icon', dynamic)
+    createP('otherStatic', 'Other Information', icon);
+    createP('otherDynamic', 'second P', icon);
+
+}
 
 
-createDiv('dynamic', main);
-createDiv('city', dynamic)
-createP('cityStatic', 'City', city);
-createP('cityDynamic', 'second P', city);
-createDiv('temperature', dynamic);
-createP('tempStatic', 'Temperature', temperature);
-createP('kTemp', 'Kelvin', temperature);
-createP('fTemp', 'Farenheit', temperature);
-createP('cTemp', 'Centigrade', temperature);
-createDiv('condition', dynamic);
-createP('staticCondition', 'Condition', condition);
-createP('dynamicCondition', 'second P', condition);
-createDiv('icon', dynamic)
-createP('otherStatic', 'Other Information', icon);
-createP('otherDynamic', 'second P', icon);
 // ===================================
 // above this is the usable init function guts
 // ====================================
@@ -186,8 +191,9 @@ async function updateApp () {
 
 }
     zipSubmit.addEventListener('click', () => {
-        let userZip = document.getElementById('userZip').value;
-        console.log('afterclick', userZip);
+        dynamicInit();
+        let userZip = document.getElementById('zipSubmit').value;
+        // console.log('afterclick', userZip);
         validateZip(userZip);
         updateApp();
         
