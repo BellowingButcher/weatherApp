@@ -1,7 +1,6 @@
 var main = document.getElementById('main');
 
 document.addEventListener('DOMContentLoaded', () =>  {
-    console.log(this);
     var main = document.getElementById('main');
     createDiv('static', main);
     createDiv('titleAndZip', static);
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     })
 })
 
-function createDiv(id, parent) {
+function createDiv(/*clas, */id, parent) {
     let div = document.createElement('div');
     div.setAttribute('id', id);
     parent.appendChild(div);
