@@ -36,6 +36,7 @@ more dynamic than just hardcoding seperate elements in.
 
 
 let main = document.getElementById('main');
+const zip = [];
 
 function createDiv(id, parent) {
     let div = document.createElement('div');
@@ -57,6 +58,7 @@ createDiv('zipBox', titleAndZip)
 
 let enterZip = document.createElement('input');
 enterZip.setAttribute('type', 'number');
+enterZip.setAttribute('id', 'userZip')
 titleAndZip.appendChild(enterZip);
 let zipSubmit = document.createElement('button');
 zipSubmit.textContent = 'Get Weather'
@@ -118,8 +120,10 @@ createP('otherDynamic', 'second P', icon);
 //this is me turning getWeather into an async function
 //USE THE ASYNC FUNCTION
 //=============================
-async function getWeather () {
-    let response = await axios.get ('https://api.openweathermap.org/data/2.5/weather?zip='+'41472'+/*`${zip}`*/',us&appid=3fd35bfbfb5f10cf0f3d2a3ec1f270a4')
+async function getWeather (zipCode) {
+    let url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=3fd35bfbfb5f10cf0f3d2a3ec1f270a4`;
+    console.log('before response', url);
+    let response = await axios.get (url)
     return response;
 
 }
@@ -130,15 +134,15 @@ This is the end of getWeather funciton, axios is working and I can point to spac
 Below this line I will be working on the validateZip function
 ============================================================================*/
 
-// function validateZip(usersZip) {
-//     if (usersZip.length !== 5 || isNaN(usersZip)) {
-//         alert('Not a valid zipcode');
-//     }
-//     else {
-//         return true;
-//     }
+function validateZip(usersZip) {
+    if (usersZip.length !== 5 || isNaN(usersZip)) {
+        alert('Not a valid zipcode');
+    }
+    else {
+        return true;
+    }
 
-// }
+}
 /*====================================================
 - validateUserZip
     - If submission has any NAN
@@ -158,32 +162,39 @@ Begining my submitZipButton function
 ==================================================
 */
 
+async function updateApp () {
 
-    zipSubmit.addEventListener('click', async () => {
+    let data = await getWeather (document.getElementById('userZip').value);
+    console.log('after event', data);
+    let cityName = data.data.name;
+    console.log(cityName);
+    let tempK = data.data.main.temp;
+    console.log(tempK);
+    let condition = data.data.weather[0].main;
+    console.log(condition);
+    let icon = data.data.weather[0].icon;
+    console.log(icon);
+    let tempF = ((tempK - 273.15)*(9/5)+(32)).toFixed(2);
+    console.log(tempF);
+    let tempC = (tempK - 273.15).toFixed(2);
+    console.log(tempC);
+    document.getElementById('cityDynamic').textContent = cityName;
+    document.getElementById('kTemp').textContent = tempK + " Kelvin";
+    document.getElementById('fTemp').textContent = tempF + " Farenheit";
+    document.getElementById('cTemp').textContent = tempC + " Centigrade";
+    document.getElementById('dynamicCondition').textContent = condition;
+
+}
+    zipSubmit.addEventListener('click', () => {
+        let userZip = document.getElementById('userZip').value;
+        console.log('afterclick', userZip);
+        validateZip(userZip);
+        updateApp();
         
     //     validateZip with the information submited with click
     //     if zip is not valid alert not a valid zip
     //     if zip is valid run getWeather
     //     use information from getWeather to populate the dynamic elements
-        let data = await getWeather ();
-        console.log('after event', data);
-        let cityName = data.data.name;
-        console.log(cityName);
-        let tempK = data.data.main.temp;
-        console.log(tempK);
-        let condition = data.data.weather[0].main;
-        console.log(condition);
-        let icon = data.data.weather[0].icon;
-        console.log(icon);
-        let tempF = ((tempK - 273.15)*(9/5)+(32)).toFixed(2);
-        console.log(tempF);
-        let tempC = (tempK - 273.15).toFixed(2);
-        console.log(tempC);
-        document.getElementById('cityDynamic').textContent = cityName;
-        document.getElementById('kTemp').textContent = tempK + " Kelvin";
-        document.getElementById('fTemp').textContent = tempF + " Farenheit";
-        document.getElementById('cTemp').textContent = tempC + " Centigrade";
-        document.getElementById('dynamicCondition').textContent = condition;
 
         
         
