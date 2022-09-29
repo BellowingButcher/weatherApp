@@ -72,11 +72,6 @@ function validateZip(usersZip) {
         return alert('Not a valid zipcode');
         
     }
-    //This next if statment isnt catching an empty input
-    if (usersZip.value.length === 0) {
-        return alert('No Zipcode');
-        
-    }
     else {
         return true;
     }
