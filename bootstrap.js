@@ -37,6 +37,13 @@ function createP(id, text, parent) {
     p.textContent = text;
     parent.appendChild(p);
 }
+function createImg(src, alt, temp, parent) {
+    let img = document.createElement('img');
+    img.setAttribute('src', src)
+    img.setAttribute('alt', alt)
+    img.setAttribute('temp', temp)
+    parent.appendChild(img);
+}
 
 function dynamicInit() {
 
