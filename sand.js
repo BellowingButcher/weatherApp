@@ -205,38 +205,36 @@ Begining my submitZipButton function
         
         
     // })
-let icon = document.getElementById('icon');
-function createImg(src, alt) {
-    let img = document.createElement('img');
-    img.setAttribute('src', src);
-    img.setAttribute('alt', alt);
-    img.setAttribute('class', 'img-fluid');
-    img.setAttribute('id', 'image');
-    icon.appendChild(img);
+    function createImg(temp) {
+        let img = document.createElement('img');
+        img.setAttribute('class', 'img-fluid');
+        img.setAttribute('id', 'image');
+        let imgSrc;
+        let imgAlt;
+        switch(true) {
+            case temp <= 32:
+                imgSrc = 'images/cold.jpg'
+                imgAlt = 'cold thermometer'
+                console.log(imgSrc, imgAlt);
+                break;
+            case temp >= 60:
+                imgSrc = 'images/hot.jpg'
+                imgAlt = 'hot themometer'
+                break;
+            case temp > 32 && temp < 60:
+                imgSrc = 'images/mild.jpg'
+                imgAlt = 'mild thermometer'
+                break;
+        }
+        img.setAttribute('src', imgSrc);
+        img.setAttribute('alt', imgAlt);
+        let icon = document.getElementById('icon');
+        icon.appendChild(img);
     
-    tempF = 30;
-    
-    let imgSrc;
-    let imgAlt;
 
-    switch(tempF) {
-        case tempF <= 32:
-            imgSrc = 'images/cold.jpg'
-            imgAlt = 'cold thermometer'
-            console.log(imgSrc, imgAlt);
-            break;
-        case tempF >= 60:
-            imgSrc = 'images/hot.jpg'
-            imgAlt = 'hot themometer'
-            break;
-        case tempF > 32 && tempF < 60:
-            imgSrc = 'images/mild.jpg'
-            imgAlt = 'mild thermometer'
-            break;
-    }
 }
 
-createImg(imgSrc, imgAlt);
+createImg(70);
 // document.getElementById('image');
 // if (tempF < 32) {
 //     imgSrc = 'images/cold.jpg';
