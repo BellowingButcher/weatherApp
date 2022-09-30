@@ -1,23 +1,19 @@
 var main = document.getElementById('main');
-main.setAttribute('class', 'container.fluid text-center bg-light text-success');
 
 document.addEventListener('DOMContentLoaded', () =>  {
-    console.log(this);
     var main = document.getElementById('main');
-    createDiv('container.fluid text-center bg-light text-success', 'static', main);
-    createDiv('container', 'titleAndZip', static);
-    createP('col', 'weatherTitle', 'Weather App', titleAndZip);
-    createDiv('container', 'zipBox', titleAndZip)
+    createDiv('static', main);
+    createDiv('titleAndZip', static);
+    createP('weatherTitle', 'Weather App', titleAndZip);
+    createDiv('zipBox', titleAndZip)
     
     let enterZip = document.createElement('input');
     enterZip.setAttribute('type', 'number');
     enterZip.setAttribute('id', 'userZip')
-    enterZip.setAttribute('placeholder', 'Enter Zipcode')
     titleAndZip.appendChild(enterZip);
     let zipSubmit = document.createElement('button');
-    zipSubmit.textContent = 'Get Weather';
+    zipSubmit.textContent = 'Get Weather'
     zipSubmit.setAttribute('id', 'zipBtn');
-    zipSubmit.setAttribute('class', 'btn bg-dark text-danger')
     static.appendChild(zipSubmit);
 
     zipSubmit.addEventListener('click', () => {
@@ -29,38 +25,43 @@ document.addEventListener('DOMContentLoaded', () =>  {
     })
 })
 
-function createDiv(clas, id, parent) {
+function createDiv(/*clas, */id, parent) {
     let div = document.createElement('div');
     div.setAttribute('id', id);
-    div.setAttribute('class', clas);
     parent.appendChild(div);
 
 }
-function createP(clas, id, text, parent) {
+function createP(id, text, parent) {
     let p = document.createElement('p');
-    p.setAttribute('id', id);
-    p.setAttribute('class', clas);
+    p.setAttribute('id', id)
     p.textContent = text;
     parent.appendChild(p);
+}
+function createImg(src, alt, parent) {
+    let img = document.createElement('img');
+    img.setAttribute('src', src);
+    img.setAttribute('alt', alt);
+    img.setAttribute('class', 'img-fluid');
+    parent.appendChild(img);
 }
 
 function dynamicInit() {
 
-    createDiv('container', 'dynamic', main);
-    createDiv('row border', 'city', dynamic);
-    createP('border bg-dark', 'cityStatic', 'City', city);
-    createP('bg-secondary', 'cityDynamic', 'second P', city);
-    createDiv('row border', 'temperature', dynamic);
-    createP('bg-dark', 'tempStatic', 'Temperature', temperature);
-    createP('col bg-secondary border', 'kTemp', 'Kelvin', temperature);
-    createP('col bg-secondary border', 'fTemp', 'Farenheit', temperature);
-    createP('col bg-secondary border', 'cTemp', 'Centigrade', temperature);
-    createDiv('row border', 'condition', dynamic);
-    createP('border bg-dark', 'staticCondition', 'Condition', condition);
-    createP('border bg-secondary', 'dynamicCondition', 'second P', condition);
-    createDiv('border', 'icon', dynamic);
-    createP('bg-dark', 'otherStatic', 'Other Information', icon);
-    createP('bg-secondary', 'otherDynamic', 'second P', icon);
+    createDiv('dynamic', main);
+    createDiv('city', dynamic)
+    createP('cityStatic', 'City', city);
+    createP('cityDynamic', 'second P', city);
+    createDiv('temperature', dynamic);
+    createP('tempStatic', 'Temperature', temperature);
+    createP('kTemp', 'Kelvin', temperature);
+    createP('fTemp', 'Farenheit', temperature);
+    createP('cTemp', 'Centigrade', temperature);
+    createDiv('condition', dynamic);
+    createP('staticCondition', 'Condition', condition);
+    createP('dynamicCondition', 'second P', condition);
+    createDiv('icon', dynamic)
+    createP('otherStatic', 'Other Information', icon);
+    createP('otherDynamic', 'second P', icon);
 
 }
 
@@ -86,19 +87,36 @@ function validateZip(usersZip) {
 async function updateApp () {
 
     let data = await getWeather (document.getElementById('userZip').value);
-    console.log('after event', data);
+    // console.log('after event', data);
     let cityName = data.data.name;
-    console.log(cityName);
+    // console.log(cityName);
     let tempK = data.data.main.temp;
-    console.log(tempK);
+    // console.log(tempK);
     let condition = data.data.weather[0].main;
-    console.log(condition);
-    let icon = data.data.weather[0].icon;
-    console.log(icon);
+    // console.log(condition);
+    // console.log(icon);
     let tempF = ((tempK - 273.15)*(9/5)+(32)).toFixed(2);
-    console.log(tempF);
+    // console.log(tempF);
     let tempC = (tempK - 273.15).toFixed(2);
-    console.log(tempC);
+    // console.log(tempC);
+    let imgSrc;
+    let imgAlt;
+    let imgParent;
+    if (tempF < 32) {
+    imgSrc = images/cold.jpg;
+    imgAlt = 'cold thermometer';
+    imgParent = 'icon';
+    }
+    else if (tempf > 55) {
+    imgSrc = images/hot.jpg;
+    imgAlt = 'hot thermometer';
+    imgParent = 'icon';
+    }
+    else {
+    imgSrc = images/mild.jpg;
+    imgAlt = 'mild thermometer';
+    imgParent = 'icon';
+    }
     document.getElementById('cityDynamic').textContent = cityName;
     document.getElementById('kTemp').textContent = tempK + " Kelvin";
     document.getElementById('fTemp').textContent = tempF + " Farenheit";
