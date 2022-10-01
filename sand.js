@@ -225,6 +225,10 @@ Begining my submitZipButton function
                 imgSrc = 'images/mild.jpg'
                 imgAlt = 'mild thermometer'
                 break;
+                case temp > 90:
+                imgSrc = 'images/green.jpg'
+                imgAlt = 'green thermometer'
+                break;
         }
         img.setAttribute('src', imgSrc);
         img.setAttribute('alt', imgAlt);
@@ -234,7 +238,7 @@ Begining my submitZipButton function
 
 }
 
-createImg(70);
+createImg(69);
 // document.getElementById('image');
 // if (tempF < 32) {
 //     imgSrc = 'images/cold.jpg';
