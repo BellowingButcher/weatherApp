@@ -217,7 +217,7 @@ Begining my submitZipButton function
                 imgAlt = 'cold thermometer'
                 console.log(imgSrc, imgAlt);
                 break;
-            case temp >= 60:
+            case temp >= 60 && temp < 90:
                 imgSrc = 'images/hot.jpg'
                 imgAlt = 'hot themometer'
                 break;
@@ -226,7 +226,7 @@ Begining my submitZipButton function
                 imgAlt = 'mild thermometer'
                 break;
                 case temp > 90:
-                imgSrc = 'images/green.jpg'
+                imgSrc = 'images/greenThermometer.jpg'
                 imgAlt = 'green thermometer'
                 break;
         }
@@ -238,7 +238,7 @@ Begining my submitZipButton function
 
 }
 
-createImg(69);
+createImg(98);
 // document.getElementById('image');
 // if (tempF < 32) {
 //     imgSrc = 'images/cold.jpg';
